@@ -15,3 +15,10 @@ export function loadState() {
 export function clearAll() {
   localStorage.removeItem(STORAGE_KEY);
 }
+
+export function clearAllData() {
+  clearAll();
+  state.categories = [];
+  state.activeCategoryId = null;
+  console.log("Data cleared");
+}

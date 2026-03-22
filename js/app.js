@@ -1,4 +1,4 @@
-import { loadState, saveState } from "./storage.js";
+import { loadState, saveState, clearAllData } from "./storage.js";
 import { state, addCategory } from "./state.js";
 import { renderApp } from "./ui.js";
 
@@ -27,6 +27,16 @@ window.addEventListener("DOMContentLoaded", () => {
       addCategory(categoryInput.value);
       saveState();
       categoryInput.value = "";
+      renderApp();
+    }
+  });
+
+  // Clear All Button
+  const clearBtn = document.getElementById("clear-all-btn");
+  clearBtn.addEventListener("click", () => {
+    if (confirm("Wirklich alles löschen? Diese Aktion kann nicht rückgängig gemacht werden.")) {
+      clearAllData();
+      console.log("State after clear:", state);
       renderApp();
     }
   });

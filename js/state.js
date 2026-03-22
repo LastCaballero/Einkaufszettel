@@ -1,8 +1,5 @@
 export const state = {
-  categories: [
-    { id: "1", name: "Getränke", items: [] },
-    { id: "2", name: "Essen", items: [] }
-  ],
+  categories: [],
   activeCategoryId: null
 };
 
@@ -93,4 +90,9 @@ export function toggleItemDone(categoryId, itemId) {
   if (!item) return;
   
   item.done = !item.done;
+}
+
+export function resetState() {
+  state.categories = [];
+  state.activeCategoryId = null;
 }

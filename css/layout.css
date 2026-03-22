@@ -15,6 +15,11 @@
   border-bottom: 1px solid var(--border);
 }
 
+#app-footer {
+  display: flex;
+  justify-content: center;
+}
+
 #tabs {
   display: flex;
   gap: 6px;
