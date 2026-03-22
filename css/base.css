@@ -1,0 +1,24 @@
+/* Basis-Reset & Variablen */
+
+:root {
+  --bg: #f7f7f7;
+  --bg-card: #ffffff;
+  --text: #222;
+  --text-soft: #666;
+  --accent: #007aff;
+  --border: #ddd;
+  --radius: 10px;
+  --shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+}

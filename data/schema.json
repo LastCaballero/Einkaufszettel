@@ -1,0 +1,13 @@
+{
+  "category": {
+    "id": "string",
+    "name": "string",
+    "items": []
+  },
+  "item": {
+    "id": "string",
+    "label": "string",
+    "qty": "string",
+    "done": "boolean"
+  }
+}
