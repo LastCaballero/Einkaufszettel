@@ -8,6 +8,46 @@ import { saveState } from "./storage.js";
   Modulen importiert werden. Kein Selbst-Import nötig.
 */
 
+// Funktion zum Kopieren der Daten
+function copyData(data, title = "Einkaufszettel") {
+  const text = data.map(category => {
+    const itemsText = category.items.map(item => `  - ${item.label} (${item.qty})`).join('\n');
+    return `${category.name}:\n${itemsText}`;
+  }).join('\n\n');
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      // Erfolgreich kopiert, keine Meldung
+    }).catch(() => {
+      fallbackCopyTextToClipboard(text, title);
+    });
+  } else {
+    fallbackCopyTextToClipboard(text, title);
+  }
+}
+
+function fallbackCopyTextToClipboard(text, title) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  textArea.style.top = "-999999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    const successful = document.execCommand('copy');
+    if (successful) {
+      // Erfolgreich kopiert, keine Meldung
+    } else {
+      alert("Kopieren fehlgeschlagen. Daten:\n" + text);
+    }
+  } catch (err) {
+    alert("Kopieren fehlgeschlagen. Daten:\n" + text);
+  }
+  document.body.removeChild(textArea);
+}
+
 // ---------------------------------------------------------
 //  TABS RENDERN
 // ---------------------------------------------------------
@@ -25,9 +65,18 @@ export function renderTabs() {
       tab.classList.add("active");
     }
 
-    // Tab-Inhalt: Name + Delete-Button
+    // Tab-Inhalt: Share-Button + Name + Delete-Button
     const tabContent = document.createElement("div");
     tabContent.className = "tab-content";
+    
+    const shareBtn = document.createElement("button");
+    shareBtn.className = "tab-copy";
+    shareBtn.textContent = "📄";
+    shareBtn.title = "Kategorie kopieren";
+    shareBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      copyData([category], `Einkaufszettel - ${category.name}`);
+    });
     
     const tabName = document.createElement("span");
     tabName.className = "tab-name";
@@ -48,6 +97,7 @@ export function renderTabs() {
       }
     });
     
+    tabContent.appendChild(shareBtn);
     tabContent.appendChild(tabName);
     tabContent.appendChild(deleteBtn);
     tab.appendChild(tabContent);
@@ -197,6 +247,30 @@ export function renderItems() {
         }
       });
 
+      // Minus-Button
+      const minusBtn = document.createElement("button");
+      minusBtn.className = "item-qty-btn item-minus";
+      minusBtn.textContent = "−";
+      minusBtn.title = "Anzahl verringern";
+      minusBtn.addEventListener("click", () => {
+        const newQty = Math.max(0, parseInt(qtyEl.value) - 1);
+        qtyEl.value = newQty;
+        updateItem(activeCategory.id, item.id, { qty: newQty.toString() });
+        saveState();
+      });
+
+      // Plus-Button
+      const plusBtn = document.createElement("button");
+      plusBtn.className = "item-qty-btn item-plus";
+      plusBtn.textContent = "+";
+      plusBtn.title = "Anzahl erhöhen";
+      plusBtn.addEventListener("click", () => {
+        const newQty = parseInt(qtyEl.value) + 1;
+        qtyEl.value = newQty;
+        updateItem(activeCategory.id, item.id, { qty: newQty.toString() });
+        saveState();
+      });
+
       // Delete-Button
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "item-delete";
@@ -209,7 +283,9 @@ export function renderItems() {
 
       itemEl.appendChild(checkbox);
       itemEl.appendChild(labelEl);
+      itemEl.appendChild(minusBtn);
       itemEl.appendChild(qtyEl);
+      itemEl.appendChild(plusBtn);
       itemEl.appendChild(deleteBtn);
 
       itemsList.appendChild(itemEl);

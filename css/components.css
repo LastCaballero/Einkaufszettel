@@ -6,6 +6,13 @@
   align-items: center;
 }
 
+.footer-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .input-modern {
   padding: 10px 14px;
   border: 2px solid var(--border);
@@ -51,6 +58,29 @@
 .btn-primary:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+.btn-secondary {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
 }
 
 .btn-danger {
@@ -105,6 +135,37 @@
 
 .tab-name {
   flex: 1;
+}
+
+.tab-copy {
+  background: none;
+  border: none;
+  color: #28a745;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.tab-copy:hover {
+  background: rgba(40, 167, 69, 0.1);
+  color: #218838;
+}
+
+.tab.active .tab-copy {
+  color: #32cd32;
+}
+
+.tab.active .tab-copy:hover {
+  background: rgba(50, 205, 50, 0.2);
 }
 
 .tab-delete {
@@ -228,6 +289,32 @@
 .item-qty:focus {
   outline: 1px solid var(--accent);
   background: #fff;
+}
+
+.item-qty-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.item-qty-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.item-qty-btn:active {
+  transform: scale(0.95);
 }
 
 .item-delete {
