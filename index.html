@@ -34,18 +34,7 @@
   <!-- Scripts -->
 
   <script type="module" src="js/app.js"></script>
-  <script>
-    fetch("https://script.google.com/macros/s/AKfycbyeoBIh3gyy2qfVXBRyay4LC4IBbvdJqkzdXSZe2lQyEasZ2zMoSIt4LJV9RemrxXjq5w/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ref: document.referrer,
-        ua: navigator.userAgent
-      })
-    })
-      .then(r => r.json())
-      .then(console.log);
-  </script>
+  
 </body>
 
 </html>
