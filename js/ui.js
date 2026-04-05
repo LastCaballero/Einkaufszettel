@@ -260,6 +260,7 @@ export function renderItems() {
         qtyEl.value = newQty;
         updateItem(activeCategory.id, item.id, { qty: newQty.toString() });
         saveState();
+        updateStats();
       });
 
       // Plus-Button
@@ -272,6 +273,7 @@ export function renderItems() {
         qtyEl.value = newQty;
         updateItem(activeCategory.id, item.id, { qty: newQty.toString() });
         saveState();
+        updateStats();
       });
 
       // Delete-Button
@@ -327,9 +329,11 @@ export function updateStats() {
     return;
   }
   
-  // Alle abhakten Items aus allen Kategorien zählen
+  // Alle abhakten Items aus allen Kategorien zählen (mit Berücksichtigung der Mengen)
   const cartCount = state.categories.reduce((total, category) => {
-    return total + category.items.filter(item => item.done).length;
+    return total + category.items
+      .filter(item => item.done)
+      .reduce((sum, item) => sum + parseInt(item.qty || 1), 0);
   }, 0);
   
   countCartEl.textContent = cartCount;
