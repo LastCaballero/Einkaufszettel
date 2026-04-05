@@ -321,15 +321,16 @@ export function renderItems() {
 // ---------------------------------------------------------
 
 export function updateStats() {
-  const activeCategory = state.categories.find(c => c.id === state.activeCategoryId);
-  
   const countCartEl = document.getElementById("count-cart");
   
-  if (!activeCategory || !countCartEl) {
+  if (!countCartEl) {
     return;
   }
   
-  const cartCount = activeCategory.items.filter(item => item.done).length;
+  // Alle abhakten Items aus allen Kategorien zählen
+  const cartCount = state.categories.reduce((total, category) => {
+    return total + category.items.filter(item => item.done).length;
+  }, 0);
   
   countCartEl.textContent = cartCount;
 }
