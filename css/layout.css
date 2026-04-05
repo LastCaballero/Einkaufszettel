@@ -17,6 +17,31 @@
 
 #app-footer {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  text-align: center;
+}
+
+.footer-stats span:nth-child(odd) {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.footer-stats span:nth-child(even) {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.footer-controls {
+  display: flex;
+  gap: 8px;
   justify-content: center;
 }
 

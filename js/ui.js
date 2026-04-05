@@ -161,6 +161,7 @@ export function renderItems() {
     saveState();
     input.value = "";
     renderItems();
+    updateStats();
     initDragDrop();
   });
   
@@ -171,6 +172,7 @@ export function renderItems() {
       saveState();
       input.value = "";
       renderItems();
+      updateStats();
       initDragDrop();
     }
   });
@@ -210,6 +212,7 @@ export function renderItems() {
         toggleItemDone(activeCategory.id, item.id);
         saveState();
         renderItems();
+        updateStats();
       });
 
       // Label (inline editierbar)
@@ -279,6 +282,7 @@ export function renderItems() {
         deleteItem(activeCategory.id, item.id);
         saveState();
         renderItems();
+        updateStats();
       });
 
       itemEl.appendChild(checkbox);
@@ -312,7 +316,30 @@ export function renderItems() {
 //  GESAMTE APP RENDERN
 // ---------------------------------------------------------
 
+// ---------------------------------------------------------
+//  STATS AKTUALISIEREN
+// ---------------------------------------------------------
+
+export function updateStats() {
+  const activeCategory = state.categories.find(c => c.id === state.activeCategoryId);
+  
+  const countCartEl = document.getElementById("count-cart");
+  
+  if (!activeCategory || !countCartEl) {
+    return;
+  }
+  
+  const cartCount = activeCategory.items.filter(item => item.done).length;
+  
+  countCartEl.textContent = cartCount;
+}
+
+// ---------------------------------------------------------
+//  APP RENDERN
+// ---------------------------------------------------------
+
 export function renderApp() {
   renderTabs();
   renderItems();
+  updateStats();
 }
