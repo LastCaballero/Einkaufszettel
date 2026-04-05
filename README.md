@@ -2,6 +2,10 @@
 
 Eine moderne Web-App zum Verwalten von Einkaufslisten mit Kategorien.
 
+## 🌐 Live Demo
+
+**[👉 App hier öffnen](https://lastcaballero.github.io/Einkaufszettel/)**
+
 ## 📋 Features
 
 - **Kategorien erstellen** – Organisiere deine Einkaufszettel nach Kategorien (z.B. Obst, Gemüse, Haushalt)
