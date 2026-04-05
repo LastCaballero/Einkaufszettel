@@ -4,7 +4,7 @@ Eine moderne Web-App zum Verwalten von Einkaufslisten mit Kategorien.
 
 ## 🌐 Live Demo
 
-**[<a href="https://lastcaballero.github.io/Einkaufszettel/" target="_blank">👉 App hier öffnen</a>**
+**<a href="https://lastcaballero.github.io/Einkaufszettel/" target="_blank">👉 App hier öffnen</a>**
 
 ## 📋 Features
 
